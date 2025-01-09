@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabulator</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" />
+</head>
+<body>
+    <div style="display:none;" id="notes">
+         {{notes}}
+    </div>
+    <div class="segment">
+        <span class="string-name">E</span>
+        <span class="string-name">B</span>
+        <span class="string-name">G</span>
+        <span class="string-name">D</span>
+        <span class="string-name">A</span>
+        <span class="string-name">E</span>
+    </div>
+
+    <script src="{{url_for('static', filename='tabs.js')}}"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+body {
+    display: flex;
+
+    flex-flow: row wrap;
+    row-gap: 2em;
+
+    font-size: 24pt;
+    padding: 1em;
+}
+
+.segment {
+    width: 4em;
+}
+
+/*  za segment sa nazivima žica  */
+div:nth-of-type(2) {
+    width: 1em;
+}
+
+.string-name {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    line-height: 0;
+    margin-bottom: 0.75em;
+}
+
+.string-name::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #000;
+}
+
+.segment > .note-string:last-child, .segment > .string-name:last-child {
+    margin-bottom: 0;
+}
+
+.note-string {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 0.75em;
+}
+
+.note-string::before,
+.note-string::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #000;
+}
+
+.note-string:not(:empty) {
+    line-height: 0;
+}
+
+.note-string:not(:empty)::before {
+    margin-right: .25em;
+}
+
+.note-string:not(:empty)::after {
+    margin-left: .25em;
+}
+
+.end {
+    width: 0.25em;
+    border-left: solid 3px black;
+    border-right: solid 8px black;
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+}
