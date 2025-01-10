@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tabulator</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='loader.css')}}" />
+</head>
+
+<body>
+    <h1>VISER ML Tab Generator</h1>
+    <input type="file" id="audioInput" accept="audio/wav">
+    <button onclick="uploadAudio()">Upload</button>
+    <br><br>
+    <audio id="audioPlayer" controls></audio>
+    <br><br>
+    <div id="note-div">
+    </div>
+    <script src="{{url_for('static', filename='tabs.js')}}"></script>
+    <script src="{{url_for('static', filename='request.js')}}"></script>
+</body>
+
+</html>

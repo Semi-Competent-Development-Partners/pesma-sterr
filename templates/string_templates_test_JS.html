@@ -5,19 +5,23 @@
     <title>Tabulator</title>
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" />
 </head>
-<body>
+<body id="note-div">
     <div style="display:none;" id="notes">
          {{notes}}
     </div>
-    <div class="segment">
+    <!-- <div class="segment">
         <span class="string-name">E</span>
         <span class="string-name">B</span>
         <span class="string-name">G</span>
         <span class="string-name">D</span>
         <span class="string-name">A</span>
         <span class="string-name">E</span>
-    </div>
+    </div> -->
 
     <script src="{{url_for('static', filename='tabs.js')}}"></script>
+    <script>
+        const note_array = JSON.parse(document.getElementById("notes").innerHTML);
+        generate_tabs(note_array, document.body);
+    </script>
 </body>
 </html>
