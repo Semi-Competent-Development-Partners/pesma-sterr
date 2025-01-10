@@ -13,6 +13,8 @@ async function uploadAudio() {
     audioPlayer.src = audioUrl;
     audioPlayer.load();
     const noteDiv = document.getElementById('note-div');
+
+    noteDiv.innerHTML = "";
     noteDiv.classList.add("loader");
 
     const formData = new FormData();
@@ -34,6 +36,7 @@ async function uploadAudio() {
         if (data.status === 'success') { 
             noteDiv.classList.remove("loader");
             generate_tabs(JSON.parse(data.lines), noteDiv);
+            handleLayoutChange(); //iz taktice.js
             console.log('Upload i slanje uspešni!');
         } else {
             console.error('Upload i slanje neuspešni:', data.message);

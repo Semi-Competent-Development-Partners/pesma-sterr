@@ -23,7 +23,7 @@ function generate_tabs(note_array, element) {
 
 function start_segment(element){
     element.innerHTML += 
-                            `<div class="segment">
+                            `<div class="segment start">
                                 <span class="string-name">E</span>
                                 <span class="string-name">B</span>
                                 <span class="string-name">G</span>
