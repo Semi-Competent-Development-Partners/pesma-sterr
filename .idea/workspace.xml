@@ -36,9 +36,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2rPI6ro03FdC6Z4EVDQQeo8ykrp" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -51,7 +51,7 @@
     "Flask server.pesmasterr.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Dule Fakultet Saradnik Stuff Acer/KOP/pesmasterr/templates/static",
+    "last_opened_file_path": "C:/Dule Fakultet Saradnik Stuff Acer/KOP/BijeljinaProjekat",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -107,6 +107,7 @@
       <option name="presentableId" value="Default" />
       <updated>1736454111650</updated>
       <workItem from="1736454113150" duration="8872000" />
+      <workItem from="1736598004513" duration="70000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />

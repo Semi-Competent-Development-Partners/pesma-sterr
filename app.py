@@ -1,9 +1,8 @@
 import json, time
 
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 
 app = Flask(__name__)
-
 
 @app.route('/')
 def hello_world():  # put application's code here
@@ -20,6 +19,8 @@ def notes():
 
 @app.route('/test', methods = ['GET', 'POST'])
 def test(): 
+    print("DB poslat " + request.form['db'])
+    
     lines = []
     with open("./test_data/test_note.txt", 'r') as file:
         lines = file.readlines()

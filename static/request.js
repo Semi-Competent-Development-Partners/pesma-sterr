@@ -20,6 +20,9 @@ async function uploadAudio() {
     const formData = new FormData();
     formData.append('audio_file', file);
 
+    const db_value = document.getElementById('db_input').value;
+    formData.append('db', db_value);
+
     try {
         const response = await fetch('/test', {
             method: 'POST',

@@ -15,11 +15,24 @@
     <br><br>
     <audio id="audioPlayer" controls></audio>
     <br><br>
+    db <input type="number" name="db_input" id="db_input" value="20">
+    <br><br>
     <div id="note-div">
     </div>
     <script src="{{url_for('static', filename='tabs.js')}}"></script>
     <script src="{{url_for('static', filename='request.js')}}"></script>
     <script src="{{url_for('static', filename='taktice.js')}}"></script>
+    <script>
+        const numInputs = document.querySelectorAll('input[type=number]')
+
+        numInputs.forEach(function (input) {
+            input.addEventListener('change', function (e) {
+                if (e.target.value == '') {
+                    e.target.value = 20
+                }
+            })
+        })
+    </script>
 </body>
 
 </html>
