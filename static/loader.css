@@ -1,6 +1,6 @@
 .loader {
     height: 30px;
-    aspect-ratio: 2.5;
+    aspect-ratio: 5.5;
     --_g: no-repeat radial-gradient(farthest-side, #000 90%, #0000);
     background: var(--_g), var(--_g), var(--_g), var(--_g);
     background-size: 20% 50%;
