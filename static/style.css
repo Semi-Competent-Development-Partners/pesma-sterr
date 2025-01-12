@@ -13,7 +13,7 @@
 }
 
 /*  za segment sa nazivima žica  */
-div:nth-of-type(2) {
+div:nth-of-type(3) {
     width: 1em;
 }
 
@@ -85,6 +85,15 @@ button, input::file-selector-button {
     padding: 0.125rem 0.3125rem 0.125rem 0.3125rem;
     font-weight: normal;
     border: none;
+}
+
+#showMatplotBtn, #showMatplotLbl {
+    display: none;
+    padding: 0.3rem;
+}
+
+button:hover {
+    cursor: pointer;
 }
 
 h1 {

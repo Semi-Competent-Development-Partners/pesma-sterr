@@ -1,9 +1,16 @@
+
 import json, time
 import os.path
 import matplotlib
 import cv2
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
+
+#za slanje matplot graf-a korisniku
+import io
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+
+import base64
 
 import soundfile as sf
 import librosa
@@ -18,6 +25,8 @@ app.config['UPLOAD_FOLDER']=UPLOAD_FOLDER
 MODEL_PATH = 'cnnModel1.h5'
 model = load_model(MODEL_PATH)
 print(model.summary())
+
+output = io.BytesIO() #za slanje matplot graf-a korisniku
 
 note_classes = {
     "E2": 0, "F2": 1, "F#2": 2, "G2": 3, "G#2": 4, "A2": 5, "A#2": 6, "H2": 7,
@@ -38,6 +47,7 @@ def predict_note_from_segment(segment_audio, sr):
     return inverse_note_classes[predicted_class]
 
 def extract_segments(y, sr, threshold_db=-20, min_gap_sec=0.01):
+    global output
     frame_length = 2048
     hop_length = 512
 
@@ -72,20 +82,24 @@ def extract_segments(y, sr, threshold_db=-20, min_gap_sec=0.01):
         #output_path = os.path.join('uploads', f"segment_{idx + 1}.wav")
         #sf.write(output_path, segment_audio, sr)
         #print(f"Saved: {output_path}")
-    # plt.figure(figsize=(12, 6))
-    # plt.plot(times, rms_db, label="Loudness (dB)", color="blue")
-    # plt.axhline(y=threshold_db, color="red", linestyle="--", label=f"Threshold ({threshold_db} dB)")
-    #
-    # # Mark the segments on the plot
-    # for start, end in segments:
-    #     plt.axvspan(start, end, color="green", alpha=0.3,
-    #                 label="Segment" if "Segment" not in plt.gca().get_legend_handles_labels()[1] else None)
-    #
-    # plt.title("Loudness (dB) Over Time")
-    # plt.xlabel("Time (s)")
-    # plt.ylabel("Amplitude (dB)")
-    # plt.legend()
-    # plt.grid(True)
+    plt.figure(figsize=(12, 6))
+    plt.plot(times, rms_db, label="Loudness (dB)", color="blue")
+    plt.axhline(y=threshold_db, color="red", linestyle="--", label=f"Threshold ({threshold_db} dB)")
+
+    # Mark the segments on the plot
+    for start, end in segments:
+        plt.axvspan(start, end, color="green", alpha=0.3,
+                    label="Segment" if "Segment" not in plt.gca().get_legend_handles_labels()[1] else None)
+
+    plt.title("Loudness (dB) Over Time")
+    plt.xlabel("Time (s)")
+    plt.ylabel("Amplitude (dB)")
+    plt.legend()
+    plt.grid(True)
+
+    #get current figure and print to png bytes to output
+    FigureCanvas(plt.gcf()).print_png(output)
+
     #plt.show()
     return segments
 
@@ -105,7 +119,8 @@ def notes():
     return render_template('string_templates_test_JS.html', notes = lines)
 
 @app.route('/test', methods = ['GET', 'POST'])
-def test(): 
+def test():
+    global output
     print("DB poslat " + request.form['db'])
 
     print(f"Tempo poslat {request.form['tempo']}") #'fast' ili 'slow'
@@ -132,7 +147,10 @@ def test():
     #lines = [line.replace("\n", "")for line in lines]
     lines = json.dumps(lines)
 
-    return jsonify({'status': 'success', 'lines':lines}), 200
+    output.seek(0)
+    image_data = base64.b64encode(output.getvalue()).decode('utf-8')
+
+    return jsonify({'status': 'success', 'lines':lines, 'image':image_data}), 200
 
 if __name__ == '__main__':
     app.run()

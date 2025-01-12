@@ -15,35 +15,38 @@
     <span class="arrow"> → </span>
     <span class="clef-bars">𝄞𝄚</span>
     <span class="title">VISER ML Tab Generator</span></h1>
-<input type="file" id="audioInput" accept="audio/wav">
-<button onclick="uploadAudio()">Upload</button>
-<br><br>
-<audio id="audioPlayer" controls></audio>
-<br><br>
-db <input type="number" name="db_input" id="db_input" value="20">
-<br><br>
-<b>Detection type:</b><br>
-<input type="radio" name="detection" id="slow" checked value="slow"><label for="slow">Amplitude (for <em>slower</em>
-    melody tempo)</label>
-<input type="radio" name="detection" id="fast" value="fast"><label for="fast">Frequency & Amplitude (for <em>faster</em>
-    melody tempo)</label>
-<br><br>
-<div id="note-div">
-</div>
-<script src="{{ url_for('static', filename='tabs.js') }}"></script>
-<script src="{{ url_for('static', filename='request.js') }}"></script>
-<script src="{{ url_for('static', filename='taktice.js') }}"></script>
-<script>
-    const numInputs = document.querySelectorAll('input[type=number]')
+    <input type="file" id="audioInput" accept="audio/wav">
+    <button onclick="uploadAudio()" id="uploadBtn">Upload</button>
+    <br><br>
+    <audio id="audioPlayer" controls></audio>
+    <br><br>
+    db <input type="number" name="db_input" id="db_input" value="20">
+    <br><br>
+    <b>Detection type:</b><br>
+    <input type="radio" name="detection" id="slow" checked value="slow"><label for="slow">Amplitude (for <em>slower</em>
+        melody tempo)</label>
+    <input type="radio" name="detection" id="fast" value="fast"><label for="fast">Frequency & Amplitude (for <em>faster</em>
+        melody tempo)</label>
+    <br><br>
+    <button onclick="showMatPlot()" id="showMatplotBtn">Show Loudness (db) Graph</button>
+    <p id="showMatplotLbl">Enable pop-ups in your browser to show the graph.</p>
+    <br>
+    <div id="note-div">
+    </div>
+    <script src="{{ url_for('static', filename='tabs.js') }}"></script>
+    <script src="{{ url_for('static', filename='request.js') }}"></script>
+    <script src="{{ url_for('static', filename='taktice.js') }}"></script>
+    <script>
+        const numInputs = document.querySelectorAll('input[type=number]')
 
-    numInputs.forEach(function (input) {
-        input.addEventListener('change', function (e) {
-            if (e.target.value == '') {
-                e.target.value = 20
-            }
+        numInputs.forEach(function (input) {
+            input.addEventListener('change', function (e) {
+                if (e.target.value == '') {
+                    e.target.value = 20
+                }
+            })
         })
-    })
-</script>
+    </script>
 </body>
 
 </html>
