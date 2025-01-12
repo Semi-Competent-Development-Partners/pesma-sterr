@@ -4,7 +4,7 @@
     flex-flow: row wrap;
     row-gap: 2em;
 
-    font-size: 24pt;
+    font-size: 22pt;
     padding: 1em;
 }
 
@@ -69,4 +69,86 @@ div:nth-of-type(2) {
     -moz-user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+
+* {
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+button, input::file-selector-button {
+    margin: 0 0 0.2rem 2;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #C62828;
+    padding: 0.125rem 0.3125rem 0.125rem 0.3125rem;
+    font-weight: normal;
+    border: none;
+}
+
+h1 {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.note {
+    animation: slideIn 2s forwards;
+}
+
+.arrow {
+    animation-delay: 11s;
+    animation: slideIn2 4s forwards;
+}
+
+img {
+    width: 3rem;
+    padding-top: 11px;
+}
+
+.clef-bars {
+    opacity: 0;
+    animation: slideIn2 2s forwards;
+    animation-delay: 2s;
+}
+
+.title {
+    opacity: 0;
+    transform: translateX(10%);
+    animation: slideIn3 2s forwards;
+    animation-delay: 3s;
+    color: rgba(13, 71, 161, 1);
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(10%);
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn2 {
+    0% {
+
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(50%);
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn3 {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }

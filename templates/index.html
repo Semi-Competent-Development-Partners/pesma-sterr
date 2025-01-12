@@ -4,35 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Tabulator</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" />
-    <link rel="stylesheet" href="{{url_for('static', filename='loader.css')}}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='loader.css') }}"/>
 </head>
 
 <body>
-    <h1>VISER ML Tab Generator</h1>
-    <input type="file" id="audioInput" accept="audio/wav">
-    <button onclick="uploadAudio()">Upload</button>
-    <br><br>
-    <audio id="audioPlayer" controls></audio>
-    <br><br>
-    db <input type="number" name="db_input" id="db_input" value="20">
-    <br><br>
-    <div id="note-div">
-    </div>
-    <script src="{{url_for('static', filename='tabs.js')}}"></script>
-    <script src="{{url_for('static', filename='request.js')}}"></script>
-    <script src="{{url_for('static', filename='taktice.js')}}"></script>
-    <script>
-        const numInputs = document.querySelectorAll('input[type=number]')
+<h1>
+    <span class="note">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7PtrjM0IClOvgb4nGUwke9IyIdHmEppZp-A&s"></span>
+    <span class="arrow"> → </span>
+    <span class="clef-bars">𝄞𝄚</span>
+    <span class="title">VISER ML Tab Generator</span></h1>
+<input type="file" id="audioInput" accept="audio/wav">
+<button onclick="uploadAudio()">Upload</button>
+<br><br>
+<audio id="audioPlayer" controls></audio>
+<br><br>
+db <input type="number" name="db_input" id="db_input" value="20">
+<br><br>
+<div id="note-div">
+</div>
+<script src="{{ url_for('static', filename='tabs.js') }}"></script>
+<script src="{{ url_for('static', filename='request.js') }}"></script>
+<script src="{{ url_for('static', filename='taktice.js') }}"></script>
+<script>
+    const numInputs = document.querySelectorAll('input[type=number]')
 
-        numInputs.forEach(function (input) {
-            input.addEventListener('change', function (e) {
-                if (e.target.value == '') {
-                    e.target.value = 20
-                }
-            })
+    numInputs.forEach(function (input) {
+        input.addEventListener('change', function (e) {
+            if (e.target.value == '') {
+                e.target.value = 20
+            }
         })
-    </script>
+    })
+</script>
 </body>
 
 </html>
