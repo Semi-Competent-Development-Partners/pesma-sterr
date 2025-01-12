@@ -2,8 +2,10 @@ async function uploadAudio() {
     const fileInput = document.getElementById('audioInput');
     const audioPlayer = document.getElementById('audioPlayer');
 
+    const button = document.querySelector("button");
+
     if (fileInput.files.length === 0) {
-        alert('Izaberite jedan .wav audio fajl.');
+        alert('Izaberite .wav audio fajl.');
         return;
     }
 
@@ -23,7 +25,11 @@ async function uploadAudio() {
     const db_value = document.getElementById('db_input').value;
     formData.append('db', db_value);
 
+    const radio = document.querySelector("input[type='radio']:checked").value;
+    formData.append('tempo', radio);
+
     try {
+        button.style.display = "none";
         const response = await fetch('/test', {
             method: 'POST',
             body: formData
@@ -37,14 +43,15 @@ async function uploadAudio() {
 
         //status je deo JSON response object-a koji flask vraca, =/= status-code (200, 400, 500...)
         if (data.status === 'success') { 
+            noteDiv.innerHTML = "";
             noteDiv.classList.remove("loader");
             generate_tabs(JSON.parse(data.lines), noteDiv);
             handleLayoutChange(); //iz taktice.js
             console.log('Upload i slanje uspešni!');
         } else {
-            console.error('Upload i slanje neuspešni:', data.message);
+            /*console.error*/alert('Upload i slanje neuspešni:', data.message);
         }
-
+        button.style.display = "inline-block";
     } catch (error) {
         console.error('Neuspešan upload audio fajla:', error);
     }

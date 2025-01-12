@@ -22,6 +22,12 @@
 <br><br>
 db <input type="number" name="db_input" id="db_input" value="20">
 <br><br>
+<b>Detection type:</b><br>
+<input type="radio" name="detection" id="slow" checked value="slow"><label for="slow">Amplitude (for <em>slower</em>
+    melody tempo)</label>
+<input type="radio" name="detection" id="fast" value="fast"><label for="fast">Frequency & Amplitude (for <em>faster</em>
+    melody tempo)</label>
+<br><br>
 <div id="note-div">
 </div>
 <script src="{{ url_for('static', filename='tabs.js') }}"></script>

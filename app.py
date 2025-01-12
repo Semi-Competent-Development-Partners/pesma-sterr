@@ -69,24 +69,24 @@ def extract_segments(y, sr, threshold_db=-20, min_gap_sec=0.01):
         segment_audio = y[start_sample:end_sample]
 
         # Save the segment to a WAV file
-        output_path = os.path.join('uploads', f"segment_{idx + 1}.wav")
-        sf.write(output_path, segment_audio, sr)
-        print(f"Saved: {output_path}")
-    plt.figure(figsize=(12, 6))
-    plt.plot(times, rms_db, label="Loudness (dB)", color="blue")
-    plt.axhline(y=threshold_db, color="red", linestyle="--", label=f"Threshold ({threshold_db} dB)")
-
-    # Mark the segments on the plot
-    for start, end in segments:
-        plt.axvspan(start, end, color="green", alpha=0.3,
-                    label="Segment" if "Segment" not in plt.gca().get_legend_handles_labels()[1] else None)
-
-    plt.title("Loudness (dB) Over Time")
-    plt.xlabel("Time (s)")
-    plt.ylabel("Amplitude (dB)")
-    plt.legend()
-    plt.grid(True)
-    plt.show()
+        #output_path = os.path.join('uploads', f"segment_{idx + 1}.wav")
+        #sf.write(output_path, segment_audio, sr)
+        #print(f"Saved: {output_path}")
+    # plt.figure(figsize=(12, 6))
+    # plt.plot(times, rms_db, label="Loudness (dB)", color="blue")
+    # plt.axhline(y=threshold_db, color="red", linestyle="--", label=f"Threshold ({threshold_db} dB)")
+    #
+    # # Mark the segments on the plot
+    # for start, end in segments:
+    #     plt.axvspan(start, end, color="green", alpha=0.3,
+    #                 label="Segment" if "Segment" not in plt.gca().get_legend_handles_labels()[1] else None)
+    #
+    # plt.title("Loudness (dB) Over Time")
+    # plt.xlabel("Time (s)")
+    # plt.ylabel("Amplitude (dB)")
+    # plt.legend()
+    # plt.grid(True)
+    #plt.show()
     return segments
 
 
@@ -107,6 +107,9 @@ def notes():
 @app.route('/test', methods = ['GET', 'POST'])
 def test(): 
     print("DB poslat " + request.form['db'])
+
+    print(f"Tempo poslat {request.form['tempo']}") #'fast' ili 'slow'
+
     threshold_db=int(request.form['db'])*(-1)
     file=request.files['audio_file']
     filename=secure_filename(file.filename)
