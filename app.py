@@ -120,6 +120,7 @@ def notes():
 
 @app.route('/test', methods = ['GET', 'POST'])
 def test():
+    lines = []
     global output
     print("DB poslat " + request.form['db'])
 
@@ -131,15 +132,61 @@ def test():
     file_path=os.path.join(app.config['UPLOAD_FOLDER'],filename)
     file.save(file_path)
     y,sr=librosa.load(file_path,sr=44100)
-    segments = extract_segments(y, sr, threshold_db=threshold_db, min_gap_sec=0.01)
-    lines = []
-    for start_time, end_time in segments:
-        start_sample = int(start_time * sr)
-        end_sample = int(end_time * sr)
-        segment_audio = y[start_sample:end_sample]
 
-        predicted_note = predict_note_from_segment(segment_audio, sr)
-        lines.append(predicted_note)
+    if request.form['tempo']=="slow":
+        segments = extract_segments(y, sr, threshold_db=threshold_db, min_gap_sec=0.01)
+
+        for start_time, end_time in segments:
+            start_sample = int(start_time * sr)
+            end_sample = int(end_time * sr)
+            segment_audio = y[start_sample:end_sample]
+
+            predicted_note = predict_note_from_segment(segment_audio, sr)
+            lines.append(predicted_note)
+    else:
+        segments = extract_segments(y, sr, threshold_db=threshold_db, min_gap_sec=0.01)
+        segment_idx = 1
+        output_dir = "uploads"
+        for start, end in segments:
+            start_sample = int(start * sr)
+            end_sample = int(end * sr)
+
+            segment_audio = y[start_sample:end_sample]
+            onsets = librosa.onset.onset_detect(y=segment_audio, sr=sr, hop_length=512)
+            onset_times = librosa.frames_to_time(onsets, sr=sr)
+            for i in range(len(onset_times) - 1):
+                sub_start_sample = int(onset_times[i] * sr)
+                sub_end_sample = int(onset_times[i + 1] * sr)
+                print(sub_start_sample)
+                print(sub_end_sample)
+                #sub_segment_audio = segment_audio[sub_start_sample:sub_end_sample]
+
+                # Calculate the total length of the segment
+                segment_length = sub_end_sample - sub_start_sample
+
+                # Calculate the indices for the thirds
+                one_third_length = segment_length // 3
+
+                # Extract the start, middle, and end thirds
+                start_third = segment_audio[sub_start_sample:sub_start_sample + one_third_length]
+                middle_third = segment_audio[
+                               sub_start_sample + one_third_length:sub_start_sample + 2 * one_third_length]
+                end_third = segment_audio[sub_start_sample + 2 * one_third_length:sub_end_sample]
+
+                # Repeat the middle third three times
+                middle_repeated = np.concatenate([middle_third, middle_third, middle_third])
+
+                # Concatenate the start, repeated middle, and end parts
+                sub_segment_audio = np.concatenate([start_third, middle_repeated, end_third])
+
+                predicted_note=predict_note_from_segment(sub_segment_audio,sr)
+                lines.append(predicted_note)
+
+                output_path = os.path.join(output_dir, f"segment_{segment_idx}.wav")
+                # sf.write(output_path, sub_segment_audio, sr)
+                # print(f"Saved: {output_path}")
+                segment_idx += 1
+
     print(lines)
 
     #with open("./test_data/test_note.txt", 'r') as file:
