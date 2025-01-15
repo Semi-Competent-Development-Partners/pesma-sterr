@@ -25,7 +25,7 @@ function start_segment(element){
     element.innerHTML += 
                             `<div class="segment start">
                                 <span class="string-name">E</span>
-                                <span class="string-name">B</span>
+                                <span class="string-name">H</span>
                                 <span class="string-name">G</span>
                                 <span class="string-name">D</span>
                                 <span class="string-name">A</span>

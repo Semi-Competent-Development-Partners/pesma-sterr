@@ -8,8 +8,8 @@
     padding: 1em;
 }
 
-.segment {
-    width: 4em;
+.segment:not(.end){
+    min-width: 4em;
 }
 
 /*  za segment sa nazivima žica  */
