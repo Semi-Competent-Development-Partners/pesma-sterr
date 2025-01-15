@@ -1,22 +1,5 @@
 __pycache__/app.cpython-39.pyc
 .idea/workspace.xml
 .idea/workspace.xml
-uploads/segment_1.wav
-uploads/segment_2.wav
-uploads/segment_3.wav
-uploads/segment_4.wav
-uploads/segment_5.wav
-uploads/segment_6.wav
-uploads/segment_7.wav
-uploads/segment_8.wav
-uploads/segment_9.wav
-uploads/segment_10.wav
-uploads/segment_11.wav
-uploads/segment_12.wav
-uploads/segment_13.wav
-uploads/segment_14.wav
 templates/index copy.html
-uploads/csilly.wav
-uploads/jinglesilly.wav
-uploads/kolosilly.wav
-uploads/silly.wav
+uploads/*
